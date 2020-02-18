@@ -11,6 +11,7 @@ var renderedImage3 = null;
 var imageIndex3 = null;
 var allBusMallImages = [];
 var totalClicks = 0;
+var myChart = null;
 
 
 function BusMallImage (name, imagePath) {
@@ -39,6 +40,26 @@ new BusMallImage('usb', './img/usb.gif');
 new BusMallImage('water-can', './img/water-can.jpg');
 new BusMallImage('wine-glass', './img/wine-glass.jpg');
 
+// ///TESTING GROUND BELOW DOESN'T WORK
+// function getRandomImage (image) {
+//   var randomIndex = Math.floor(Math.random() * allBusMallImages.length);
+//   var getRandomImage = image[randomIndex];
+
+//   while (
+//     getRandomImage.name === firstImage.alt ||
+//     getRandomImage.name === secondImage.alt ||
+//     getRandomImage.name === thirdImage.alt
+//   ){
+//     randomIndex = Math.floor(Math.random() * allBusMallImages.length);
+//     getRandomImage = image[randomIndex];
+//   }
+//   return getRandomImage;
+// }
+// ///TESTING GROUND ABOVE THIS DOESN'T WORK^^^^
+
+
+
+/// bELOW THIS WORKS
 function getRandomImage () {
   var randomIndex = Math.floor(Math.random() * allBusMallImages.length);
 
@@ -51,6 +72,7 @@ function getRandomImage () {
   }
   return randomIndex;
 }
+/// ^^^ THIS WORKS
 
 function handleImageClick (event) {
   var imageId = event.target.getAttribute('alt');
@@ -110,3 +132,53 @@ renderImages();
 // var createListItem = document.createElement('li');
 // createList.appendChild(createListItem);
 // createListItem.textContent = totalClicks;
+
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+
+function formatChartLabels(arr) {
+  console.log(arr);
+  var labels = [];
+
+  for (var i = 0; i < arr.length; i++){
+    labels.push(arr[i].name);
+  }
+  return labels;
+}
+
+myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+      labels: ['Bag', 'Banana', 'Bathroom', 'Boots', 'Breakfast', 'Bubblegum'],
+      datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+      }]
+  },
+  options: {
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true
+              }
+          }]
+      }
+  }
+});
