@@ -76,17 +76,6 @@ function handleImageClick (event) {
 }
 
 function renderImages () {
-  // // testing while loop to prevent duplicates
-  // while (
-  //   imageIndex1 == imageIndex2 || 
-  //   imageIndex2 == imageIndex3 ||
-  //   imageIndex3 == imageIndex1
-  //   ){
-  //     var newImageIndex1 = Math.floor(Math.random() * imageIndex1);
-  //     var newIimageIndex2 = Math.floor(Math.random() * imageIndex2);
-  //     var newImageIndex3 = Math.floor(Math.random() * imageIndex3);
-  //   }
-  //   // closing off the testing ground
   firstImage.setAttribute('src', allBusMallImages[imageIndex1].image);
   firstImage.setAttribute('alt', allBusMallImages[imageIndex1].name);
   allBusMallImages[imageIndex1].timesRendered++;
@@ -110,3 +99,9 @@ imageIndex3 = getRandomImage();
 renderedImage2 = allBusMallImages[imageIndex3].name;
 
 renderImages();
+
+var list = document.getElementById('busmall');
+var createList = document.createElement('ul');
+var createListItem = document.createElement('li');
+createList.appendChild(createListItem);
+createListItem.textContent = totalClicks;
