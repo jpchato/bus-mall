@@ -44,7 +44,8 @@ function getRandomImage () {
 
   while (
     renderedImage1 === allBusMallImages[randomIndex].name ||
-    renderedImage2 === allBusMallImages[randomIndex].name
+    renderedImage2 === allBusMallImages[randomIndex].name ||
+    renderedImage3 === allBusMallImages[randomIndex].name
   ){
     randomIndex = Math.floor(Math.random() * allBusMallImages.length)
   }
@@ -75,6 +76,17 @@ function handleImageClick (event) {
 }
 
 function renderImages () {
+  // // testing while loop to prevent duplicates
+  // while (
+  //   imageIndex1 == imageIndex2 || 
+  //   imageIndex2 == imageIndex3 ||
+  //   imageIndex3 == imageIndex1
+  //   ){
+  //     var newImageIndex1 = Math.floor(Math.random() * imageIndex1);
+  //     var newIimageIndex2 = Math.floor(Math.random() * imageIndex2);
+  //     var newImageIndex3 = Math.floor(Math.random() * imageIndex3);
+  //   }
+  //   // closing off the testing ground
   firstImage.setAttribute('src', allBusMallImages[imageIndex1].image);
   firstImage.setAttribute('alt', allBusMallImages[imageIndex1].name);
   allBusMallImages[imageIndex1].timesRendered++;
