@@ -66,11 +66,15 @@ function handleImageClick (event) {
     imageIndex1 = getRandomImage();
     renderedImage1 = allBusMallImages[imageIndex1].name;
     imageIndex2 = getRandomImage();
-    //testing the line below this. Not included in demo and not quite sure why
+    renderedImage2 = allBusMallImages[imageIndex2].name;
     imageIndex3 = getRandomImage();
+    renderedImage3 = allBusMallImages[imageIndex3].name;
     renderImages();
   } else {
     alert('Thank you for your help. Your input is valuable to us!')
+    firstImage.removeEventListener('click', handleImageClick);
+    secondImage.removeEventListener('click', handleImageClick);
+    thirdImage.removeEventListener('click', handleImageClick);
   }
   console.log(allBusMallImages);
 }
@@ -90,6 +94,7 @@ console.log(allBusMallImages)
 
 firstImage.addEventListener('click', handleImageClick);
 secondImage.addEventListener('click', handleImageClick);
+thirdImage.addEventListener('click', handleImageClick);
 
 imageIndex1 = getRandomImage();
 renderedImage1 = allBusMallImages[imageIndex1].name;
@@ -100,8 +105,8 @@ renderedImage2 = allBusMallImages[imageIndex3].name;
 
 renderImages();
 
-var list = document.getElementById('busmall');
-var createList = document.createElement('ul');
-var createListItem = document.createElement('li');
-createList.appendChild(createListItem);
-createListItem.textContent = totalClicks;
+// var list = document.getElementById('busmall');
+// var createList = document.createElement('ul');
+// var createListItem = document.createElement('li');
+// createList.appendChild(createListItem);
+// createListItem.textContent = totalClicks;
