@@ -48,7 +48,7 @@ new BusMallImage('wine-glass', './img/wine-glass.jpg');
 function getRandomImage () {
   var randomIndex = Math.floor(Math.random() * allBusMallImages.length);
 
-  while (
+  if (
     renderedImage1 === allBusMallImages[randomIndex].name ||
     renderedImage2 === allBusMallImages[randomIndex].name ||
     renderedImage3 === allBusMallImages[randomIndex].name
