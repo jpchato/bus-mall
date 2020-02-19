@@ -13,7 +13,6 @@ var allBusMallImages = [];
 var totalClicks = 0;
 var myChart = null;
 
-
 function BusMallImage (name, imagePath) {
   this.name = name;
   this.image = imagePath;
@@ -48,10 +47,10 @@ new BusMallImage('wine-glass', './img/wine-glass.jpg');
 function getRandomImage () {
   var randomIndex = Math.floor(Math.random() * allBusMallImages.length);
 
-  if (
+  while (
     renderedImage1 === allBusMallImages[randomIndex].name ||
     renderedImage2 === allBusMallImages[randomIndex].name ||
-    renderedImage3 === allBusMallImages[randomIndex].name
+    renderedImage3 === allBusMallImages[randomIndex].name 
   ){
     randomIndex = Math.floor(Math.random() * allBusMallImages.length)
   }
@@ -82,6 +81,7 @@ function handleImageClick (event) {
     firstImage.removeEventListener('click', handleImageClick);
     secondImage.removeEventListener('click', handleImageClick);
     thirdImage.removeEventListener('click', handleImageClick);
+    busMallArr();
     chartMaker();
   }
   console.log(allBusMallImages);
@@ -116,51 +116,89 @@ renderImages();
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
-function formatChartLabels(arr) {
-  console.log(arr);
-  var labels = [];
+// function formatChartLabels(arr) {
+//   console.log(arr);
+//   var labels = [];
 
-  for (var i = 0; i < arr.length; i++){
-    labels.push(arr[i].name);
+//   for (var i = 0; i < arr.length; i++){
+//     labels.push(arr[i].name);
+//   }
+//   return labels;
+// }
+
+var allClicks = [];
+var allRenders = [];
+var allNames = [];
+
+function busMallArr () {
+  for (var i = 0; i < allBusMallImages.length; i++){
+    allClicks[i] = allBusMallImages[i].timesClicked;
+    allRenders[i] = allBusMallImages[i].timesRendered;
+    allNames[i] = allBusMallImages[i].name;
   }
-  return labels;
+  console.log(busMallArr);
 }
+
+
 
 function chartMaker () {
 myChart = new Chart(ctx, {
   type: 'bar',
-  data: {
-      labels: ['Bag', 'Banana', 'Bathroom', 'Boots', 'Breakfast', 'Bubblegum', 'Chair', 'Cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'],
+    data: {
+      labels: allNames,
       datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
-              'rgba(54, 162, 235, 0.2)',
-              'rgba(255, 206, 86, 0.2)',
-              'rgba(75, 192, 192, 0.2)',
-              'rgba(153, 102, 255, 0.2)',
-              'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)'
-          ],
-          borderWidth: 1
-      }]
-  },
-  options: {
+        label: 'Times Clicked',
+        data: allClicks,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }, {
+        label: 'Times Seen',
+        data: allRenders,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }],
+    },
+    options: {
       scales: {
-          yAxes: [{
-              ticks: {
-                  beginAtZero: true
-              }
-          }]
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
       }
-  }
-})};
+    }
+  });
+
+}
+
 
