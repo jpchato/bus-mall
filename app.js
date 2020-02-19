@@ -11,6 +11,7 @@ var renderedImage3 = null;
 var imageIndex3 = null;
 var allBusMallImages = [];
 var totalClicks = 0;
+var myChart = null;
 
 
 function BusMallImage (name, imagePath) {
@@ -26,12 +27,16 @@ new BusMallImage('bag', './img/bag.jpg');
 new BusMallImage('banana', './img/banana.jpg');
 new BusMallImage('bathroom', './img/bathroom.jpg');
 new BusMallImage('boots', './img/boots.jpg');
+new BusMallImage('breakfast', './img/breakfast.jpg');
+new BusMallImage('bubblegum', './img/bubblegum.jpg')
 new BusMallImage('chair', './img/chair.jpg');
 new BusMallImage('cthulhu', './img/cthulhu.jpg');
 new BusMallImage('dog-duck', './img/dog-duck.jpg');
+new BusMallImage('dragon', './img/dragon.jpg');
 new BusMallImage('pen', './img/pen.jpg');
 new BusMallImage('pet-sweep', './img/pet-sweep.jpg');
 new BusMallImage('scissors', './img/scissors.jpg');
+new BusMallImage('shark', './img/shark.jpg')
 new BusMallImage('sweep', './img/sweep.png');
 new BusMallImage('tauntaun', './img/tauntaun.jpg');
 new BusMallImage('unicorn', './img/unicorn.jpg');
@@ -39,10 +44,11 @@ new BusMallImage('usb', './img/usb.gif');
 new BusMallImage('water-can', './img/water-can.jpg');
 new BusMallImage('wine-glass', './img/wine-glass.jpg');
 
+/// bELOW THIS WORKS
 function getRandomImage () {
   var randomIndex = Math.floor(Math.random() * allBusMallImages.length);
 
-  while (
+  if (
     renderedImage1 === allBusMallImages[randomIndex].name ||
     renderedImage2 === allBusMallImages[randomIndex].name ||
     renderedImage3 === allBusMallImages[randomIndex].name
@@ -51,6 +57,7 @@ function getRandomImage () {
   }
   return randomIndex;
 }
+/// ^^^ THIS WORKS
 
 function handleImageClick (event) {
   var imageId = event.target.getAttribute('alt');
@@ -75,6 +82,7 @@ function handleImageClick (event) {
     firstImage.removeEventListener('click', handleImageClick);
     secondImage.removeEventListener('click', handleImageClick);
     thirdImage.removeEventListener('click', handleImageClick);
+    chartMaker();
   }
   console.log(allBusMallImages);
 }
@@ -105,8 +113,54 @@ renderedImage2 = allBusMallImages[imageIndex3].name;
 
 renderImages();
 
-// var list = document.getElementById('busmall');
-// var createList = document.createElement('ul');
-// var createListItem = document.createElement('li');
-// createList.appendChild(createListItem);
-// createListItem.textContent = totalClicks;
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+
+function formatChartLabels(arr) {
+  console.log(arr);
+  var labels = [];
+
+  for (var i = 0; i < arr.length; i++){
+    labels.push(arr[i].name);
+  }
+  return labels;
+}
+
+function chartMaker () {
+myChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+      labels: ['Bag', 'Banana', 'Bathroom', 'Boots', 'Breakfast', 'Bubblegum', 'Chair', 'Cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'],
+      datasets: [{
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(255, 159, 64, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)'
+          ],
+          borderWidth: 1
+      }]
+  },
+  options: {
+      scales: {
+          yAxes: [{
+              ticks: {
+                  beginAtZero: true
+              }
+          }]
+      }
+  }
+})};
+
