@@ -27,12 +27,16 @@ new BusMallImage('bag', './img/bag.jpg');
 new BusMallImage('banana', './img/banana.jpg');
 new BusMallImage('bathroom', './img/bathroom.jpg');
 new BusMallImage('boots', './img/boots.jpg');
+new BusMallImage('breakfast', './img/breakfast.jpg');
+new BusMallImage('bubblegum', './img/bubblegum.jpg')
 new BusMallImage('chair', './img/chair.jpg');
 new BusMallImage('cthulhu', './img/cthulhu.jpg');
 new BusMallImage('dog-duck', './img/dog-duck.jpg');
+new BusMallImage('dragon', './img/dragon.jpg');
 new BusMallImage('pen', './img/pen.jpg');
 new BusMallImage('pet-sweep', './img/pet-sweep.jpg');
 new BusMallImage('scissors', './img/scissors.jpg');
+new BusMallImage('shark', './img/shark.jpg')
 new BusMallImage('sweep', './img/sweep.png');
 new BusMallImage('tauntaun', './img/tauntaun.jpg');
 new BusMallImage('unicorn', './img/unicorn.jpg');
