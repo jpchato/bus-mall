@@ -44,25 +44,6 @@ new BusMallImage('usb', './img/usb.gif');
 new BusMallImage('water-can', './img/water-can.jpg');
 new BusMallImage('wine-glass', './img/wine-glass.jpg');
 
-// ///TESTING GROUND BELOW DOESN'T WORK
-// function getRandomImage (image) {
-//   var randomIndex = Math.floor(Math.random() * allBusMallImages.length);
-//   var getRandomImage = image[randomIndex];
-
-//   while (
-//     getRandomImage.name === firstImage.alt ||
-//     getRandomImage.name === secondImage.alt ||
-//     getRandomImage.name === thirdImage.alt
-//   ){
-//     randomIndex = Math.floor(Math.random() * allBusMallImages.length);
-//     getRandomImage = image[randomIndex];
-//   }
-//   return getRandomImage;
-// }
-// ///TESTING GROUND ABOVE THIS DOESN'T WORK^^^^
-
-
-
 /// bELOW THIS WORKS
 function getRandomImage () {
   var randomIndex = Math.floor(Math.random() * allBusMallImages.length);
@@ -101,6 +82,7 @@ function handleImageClick (event) {
     firstImage.removeEventListener('click', handleImageClick);
     secondImage.removeEventListener('click', handleImageClick);
     thirdImage.removeEventListener('click', handleImageClick);
+    chartMaker();
   }
   console.log(allBusMallImages);
 }
@@ -131,12 +113,6 @@ renderedImage2 = allBusMallImages[imageIndex3].name;
 
 renderImages();
 
-// var list = document.getElementById('busmall');
-// var createList = document.createElement('ul');
-// var createListItem = document.createElement('li');
-// createList.appendChild(createListItem);
-// createListItem.textContent = totalClicks;
-
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
@@ -150,10 +126,11 @@ function formatChartLabels(arr) {
   return labels;
 }
 
+function chartMaker () {
 myChart = new Chart(ctx, {
   type: 'bar',
   data: {
-      labels: ['Bag', 'Banana', 'Bathroom', 'Boots', 'Breakfast', 'Bubblegum'],
+      labels: ['Bag', 'Banana', 'Bathroom', 'Boots', 'Breakfast', 'Bubblegum', 'Chair', 'Cthulhu', 'dog-duck', 'dragon', 'pen', 'pet-sweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'water-can', 'wine-glass'],
       datasets: [{
           label: '# of Votes',
           data: [12, 19, 3, 5, 2, 3],
@@ -185,4 +162,5 @@ myChart = new Chart(ctx, {
           }]
       }
   }
-});
+})};
+
