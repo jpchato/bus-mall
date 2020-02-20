@@ -13,14 +13,15 @@ var allBusMallImages = [];
 var totalClicks = 0;
 var myChart = null;
 
+
 function BusMallImage (name, imagePath) {
   this.name = name;
   this.image = imagePath;
   this.timesClicked = 0;
   this.timesRendered = 0;
   allBusMallImages.push(this);
-
 }
+
 
 new BusMallImage('bag', './img/bag.jpg');
 new BusMallImage('banana', './img/banana.jpg');
@@ -43,6 +44,7 @@ new BusMallImage('usb', './img/usb.gif');
 new BusMallImage('water-can', './img/water-can.jpg');
 new BusMallImage('wine-glass', './img/wine-glass.jpg');
 
+
 /// bELOW THIS WORKS
 function getRandomImage () {
   var randomIndex = Math.floor(Math.random() * allBusMallImages.length);
@@ -57,6 +59,7 @@ function getRandomImage () {
   return randomIndex;
 }
 /// ^^^ THIS WORKS
+
 
 function handleImageClick (event) {
   var imageId = event.target.getAttribute('alt');
@@ -86,6 +89,7 @@ function handleImageClick (event) {
   }
   console.log(allBusMallImages);
 }
+
 
 function renderImages () {
   firstImage.setAttribute('src', allBusMallImages[imageIndex1].image);
@@ -130,15 +134,14 @@ var allClicks = [];
 var allRenders = [];
 var allNames = [];
 
+
 function busMallArr () {
   for (var i = 0; i < allBusMallImages.length; i++){
     allClicks[i] = allBusMallImages[i].timesClicked;
     allRenders[i] = allBusMallImages[i].timesRendered;
     allNames[i] = allBusMallImages[i].name;
   }
-  console.log(busMallArr);
 }
-
 
 
 function chartMaker () {
@@ -202,3 +205,7 @@ myChart = new Chart(ctx, {
 }
 
 
+function setData (key, data) {
+  var stringifiedData = JSON.stringify(data)
+
+}
