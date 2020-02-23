@@ -14,6 +14,7 @@ var allBusMallImages = [];
 var totalClicks = 0;
 var myChart = null;
 
+
 // Constructor function. Takes in image name and path. timesClicked and timesRendered keep track of individual picture clicks and renders. The .push is pushing the output into our global array to keep track of it.
 function BusMallImage (name, imagePath) {
   this.name = name;
@@ -22,6 +23,7 @@ function BusMallImage (name, imagePath) {
   this.timesRendered = 0;
   allBusMallImages.push(this);
 }
+
 
 // All of our generated busmall images
 new BusMallImage('bag', './img/bag.jpg');
@@ -45,7 +47,9 @@ new BusMallImage('usb', './img/usb.gif');
 new BusMallImage('water-can', './img/water-can.jpg');
 new BusMallImage('wine-glass', './img/wine-glass.jpg');
 
+
 // Randomly generates images. Does not work perfectly. Images can show up again on a refresh but it will never be in the same position. So, an image might show up in the 1 spot but on refresh shows up in the 2 spot.
+
 function getRandomImage () {
   var randomIndex = Math.floor(Math.random() * allBusMallImages.length);
 
@@ -58,6 +62,7 @@ function getRandomImage () {
   }
   return randomIndex;
 }
+
 
 // This function keeps track of the amount of clicks. After 25 clicks, users are not allowed to click anymore. Upon completion of the clicks, the chart is rendered using the busMallArr we create below and the chartMaker function. The rendered image is using the imageIndex value we generated above.
 function handleImageClick (event) {
@@ -88,6 +93,7 @@ function handleImageClick (event) {
   }
   console.log(allBusMallImages);
 }
+
 
 // This function is what we invoke to generate our images. Sets the alt and src attributes of the randomly generated images for tracking purposes. Also keeps track of the amount of times an image is randomly generated.
 function renderImages () {
@@ -128,6 +134,7 @@ var allClicks = [];
 var allRenders = [];
 var allNames = [];
 
+
 // loops through our global place holder array and extracts clicks, renders, and names of individual images for buliding the graph
 function busMallArr () {
   for (var i = 0; i < allBusMallImages.length; i++){
@@ -135,8 +142,8 @@ function busMallArr () {
     allRenders[i] = allBusMallImages[i].timesRendered;
     allNames[i] = allBusMallImages[i].name;
   }
-  console.log(busMallArr);
 }
+
 
 
 // Chart making function. Most of the code here is pulled from a website to build the graph. The data portion of the chart only accepts arrays
@@ -205,6 +212,7 @@ function saveData (data) {
   var stringifiedData = JSON.stringify(data);
   localStorage.setItem('imagePath', stringifiedData);
 }
+
 
 // unstringifying our data 
 function getData (key) {
