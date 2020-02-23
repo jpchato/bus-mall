@@ -1,4 +1,19 @@
 img {
   height: 300px;
-  width: 200px;
+  width: 300px;
+  align-content: center;
+  margin-left: 100px;
+}
+
+#busmall {
+  background-color: red;
+}
+
+header {
+  background-color: yellow;
+  text-align: center;
+}
+
+body {
+  background-color: gold;
 }

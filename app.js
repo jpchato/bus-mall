@@ -1,5 +1,6 @@
 'use strict';
 
+//Global variables. Connection to html with getElementById. renderedImage is place holder variable that gets filled in later. imageIndex also a place holder variable that gets filled in later. allBusMallImages is an array that holds all our images and we push content into to it to track changes. totalClicks keeps track of the total amount of clicks to stop accepting clicks after 25. myChart is also a place holder variable. It is filled in later.
 var firstImage = document.getElementById('first-image');
 var renderedImage1 = null;
 var imageIndex1 = null;
@@ -13,15 +14,16 @@ var allBusMallImages = [];
 var totalClicks = 0;
 var myChart = null;
 
+// Constructor function. Takes in image name and path. timesClicked and timesRendered keep track of individual picture clicks and renders. The .push is pushing the output into our global array to keep track of it.
 function BusMallImage (name, imagePath) {
   this.name = name;
   this.image = imagePath;
   this.timesClicked = 0;
   this.timesRendered = 0;
   allBusMallImages.push(this);
-
 }
 
+// All of our generated busmall images
 new BusMallImage('bag', './img/bag.jpg');
 new BusMallImage('banana', './img/banana.jpg');
 new BusMallImage('bathroom', './img/bathroom.jpg');
@@ -43,7 +45,7 @@ new BusMallImage('usb', './img/usb.gif');
 new BusMallImage('water-can', './img/water-can.jpg');
 new BusMallImage('wine-glass', './img/wine-glass.jpg');
 
-/// bELOW THIS WORKS
+// Randomly generates images. Does not work perfectly. Images can show up again on a refresh but it will never be in the same position. So, an image might show up in the 1 spot but on refresh shows up in the 2 spot.
 function getRandomImage () {
   var randomIndex = Math.floor(Math.random() * allBusMallImages.length);
 
@@ -56,8 +58,8 @@ function getRandomImage () {
   }
   return randomIndex;
 }
-/// ^^^ THIS WORKS
 
+// This function keeps track of the amount of clicks. After 25 clicks, users are not allowed to click anymore. Upon completion of the clicks, the chart is rendered using the busMallArr we create below and the chartMaker function. The rendered image is using the imageIndex value we generated above.
 function handleImageClick (event) {
   var imageId = event.target.getAttribute('alt');
   console.log(imageId);
@@ -87,6 +89,7 @@ function handleImageClick (event) {
   console.log(allBusMallImages);
 }
 
+// This function is what we invoke to generate our images. Sets the alt and src attributes of the randomly generated images for tracking purposes. Also keeps track of the amount of times an image is randomly generated.
 function renderImages () {
   firstImage.setAttribute('src', allBusMallImages[imageIndex1].image);
   firstImage.setAttribute('alt', allBusMallImages[imageIndex1].name);
@@ -100,10 +103,12 @@ function renderImages () {
 }
 console.log(allBusMallImages)
 
+// This is our event listener for clicks.
 firstImage.addEventListener('click', handleImageClick);
 secondImage.addEventListener('click', handleImageClick);
 thirdImage.addEventListener('click', handleImageClick);
 
+// This is filling in our empty global variables.
 imageIndex1 = getRandomImage();
 renderedImage1 = allBusMallImages[imageIndex1].name;
 imageIndex2 = getRandomImage();
@@ -111,25 +116,19 @@ renderedImage2 = allBusMallImages[imageIndex2].name;
 imageIndex3 = getRandomImage();
 renderedImage2 = allBusMallImages[imageIndex3].name;
 
+// Invocation of our renderImages function
 renderImages();
 
+// variables used to create a canvas
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
-// function formatChartLabels(arr) {
-//   console.log(arr);
-//   var labels = [];
-
-//   for (var i = 0; i < arr.length; i++){
-//     labels.push(arr[i].name);
-//   }
-//   return labels;
-// }
-
+// empty arrays filled from the function below to create data for our graph
 var allClicks = [];
 var allRenders = [];
 var allNames = [];
 
+// loops through our global place holder array and extracts clicks, renders, and names of individual images for buliding the graph
 function busMallArr () {
   for (var i = 0; i < allBusMallImages.length; i++){
     allClicks[i] = allBusMallImages[i].timesClicked;
@@ -140,7 +139,7 @@ function busMallArr () {
 }
 
 
-
+// Chart making function. Most of the code here is pulled from a website to build the graph. The data portion of the chart only accepts arrays
 function chartMaker () {
 myChart = new Chart(ctx, {
   type: 'bar',
@@ -201,4 +200,15 @@ myChart = new Chart(ctx, {
 
 }
 
+// stringify our data and saving to local storage
+function saveData (data) {
+  var stringifiedData = JSON.stringify(data);
+  localStorage.setItem('imagePath', stringifiedData);
+}
 
+// unstringifying our data 
+function getData (key) {
+  var stringData = localStorage.getItem(key);
+  var parsedData = JSON.parse(stringData);
+  return parsedData;
+}
